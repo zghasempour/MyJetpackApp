@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My First Jetpack App</string>
+    <string name="jet_pack">JetPack</string>
+</resources>
