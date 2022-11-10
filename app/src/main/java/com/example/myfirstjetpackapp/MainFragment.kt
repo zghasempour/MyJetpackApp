@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfirstjetpackapp.databinding.FragmentMainBinding
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(),
+NoteListAdapter.IListItemListener{
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding : FragmentMainBinding
@@ -31,13 +32,17 @@ class MainFragment : Fragment() {
             )
             viewModel.notesList.observe(viewLifecycleOwner, Observer {
                 Log.i("noteLogging",it.toString())
-                noteListAdapter = NoteListAdapter(it)
+                noteListAdapter = NoteListAdapter(it,this@MainFragment)
                 binding.recyclerView.adapter = noteListAdapter
                 binding.recyclerView.layoutManager = LinearLayoutManager(activity)
             })
             addItemDecoration(divider)
         }
         return binding.root
+    }
+
+    override fun onItemClick(noteId: Int) {
+
     }
 
 }

@@ -8,7 +8,8 @@ import com.example.myfirstjetpackapp.data.NoteEntity
 import com.example.myfirstjetpackapp.databinding.ListItemBinding
 import java.util.zip.Inflater
 
-class NoteListAdapter(private val notesList : List<NoteEntity>) :
+class NoteListAdapter(private val notesList : List<NoteEntity>,
+                      private val listener :IListItemListener) :
     RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView : View):
@@ -26,9 +27,16 @@ class NoteListAdapter(private val notesList : List<NoteEntity>) :
         val note = notesList[position]
         with(holder.binding){
             noteText.text = note.text
+            root.setOnClickListener {
+                listener.onItemClick(note.id)
+            }
         }
 
     }
 
     override fun getItemCount() = notesList.size
+
+    interface IListItemListener{
+        fun onItemClick(noteId : Int)
+    }
 }
