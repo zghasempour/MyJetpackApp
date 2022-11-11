@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfirstjetpackapp.databinding.FragmentMainBinding
@@ -23,6 +25,9 @@ NoteListAdapter.IListItemListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         binding = FragmentMainBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         with(binding.recyclerView){
@@ -42,6 +47,8 @@ NoteListAdapter.IListItemListener{
     }
 
     override fun onItemClick(noteId: Int) {
+        findNavController().navigate(MainFragmentDirections.
+        actionEditNote().setNoteId(noteId))
 
     }
 
