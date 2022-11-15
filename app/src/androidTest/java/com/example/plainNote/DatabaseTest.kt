@@ -1,12 +1,12 @@
-package com.example.myfirstjetpackapp
+package com.example.plainNote
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.myfirstjetpackapp.data.AppDatabase
-import com.example.myfirstjetpackapp.data.NoteDao
-import com.example.myfirstjetpackapp.data.NoteEntity
-import com.example.myfirstjetpackapp.data.SampleDataProvider
+import com.example.plainNote.data.AppDatabase
+import com.example.plainNote.data.NoteDao
+import com.example.plainNote.data.NoteEntity
+import com.example.plainNote.data.SampleDataProvider
 import org.junit.After
 
 import org.junit.Test

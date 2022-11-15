@@ -1,8 +1,8 @@
-package com.example.myfirstjetpackapp.data
+package com.example.plainNote.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.myfirstjetpackapp.NEW_NOTE_ID
+import com.example.plainNote.NEW_NOTE_ID
 import java.util.Date
 
 @Entity(tableName = "notes")

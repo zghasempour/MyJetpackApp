@@ -1,11 +1,12 @@
-package com.example.myfirstjetpackapp
+package com.example.plainNote
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myfirstjetpackapp.data.NoteEntity
+import com.example.myfirstjetpackapp.R
 import com.example.myfirstjetpackapp.databinding.ListItemBinding
+import com.example.plainNote.data.NoteEntity
 
 class NoteListAdapter(
     private val notesList: List<NoteEntity>,

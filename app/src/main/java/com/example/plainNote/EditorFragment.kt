@@ -1,4 +1,4 @@
-package com.example.myfirstjetpackapp
+package com.example.plainNote
 
 import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myfirstjetpackapp.R
 import com.example.myfirstjetpackapp.databinding.FragmentEditorBinding
 
 class EditorFragment : Fragment() {
@@ -34,6 +35,12 @@ class EditorFragment : Fragment() {
         }
 
         setHasOptionsMenu(true)
+
+        requireActivity().title =
+            if (args.noteId == NEW_NOTE_ID)
+                getString(R.string.new_note)
+        else getString(R.string.edit_note)
+
         viewModel = ViewModelProvider(this)[EditorViewModel::class.java]
         binding = FragmentEditorBinding.inflate(inflater)
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -48,7 +55,10 @@ class EditorFragment : Fragment() {
         )
         viewModel.getNoteById(args.noteId)
         viewModel.currentNote.observe(viewLifecycleOwner, Observer {
-            binding.editor.setText(it.text)
+            val savedNote = savedInstanceState?.getString(NOTE_TEXT_KEY)
+            val savedCursor = savedInstanceState?.getInt(CURSOR_POSITION_KEY) ?: 0
+            binding.editor.setText(savedNote ?: it.text)
+            binding.editor.setSelection(savedCursor)
         })
 
 
@@ -82,4 +92,11 @@ class EditorFragment : Fragment() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        with(binding.editor){
+            outState.putString(NOTE_TEXT_KEY,text.toString())
+            outState.putInt(CURSOR_POSITION_KEY,selectionStart)
+        }
+        super.onSaveInstanceState(outState)
+    }
 }

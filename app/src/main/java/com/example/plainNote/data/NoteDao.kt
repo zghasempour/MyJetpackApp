@@ -1,4 +1,4 @@
-package com.example.myfirstjetpackapp.data
+package com.example.plainNote.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

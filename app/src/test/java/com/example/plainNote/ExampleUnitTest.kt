@@ -1,4 +1,4 @@
-package com.example.myfirstjetpackapp
+package com.example.plainNote
 
 import org.junit.Test
 

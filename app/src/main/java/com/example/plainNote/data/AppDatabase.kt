@@ -1,4 +1,4 @@
-package com.example.myfirstjetpackapp.data
+package com.example.plainNote.data
 
 import android.content.Context
 import androidx.room.Database

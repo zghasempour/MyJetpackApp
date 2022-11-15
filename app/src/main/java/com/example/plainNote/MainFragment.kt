@@ -1,4 +1,4 @@
-package com.example.myfirstjetpackapp
+package com.example.plainNote
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myfirstjetpackapp.R
 import com.example.myfirstjetpackapp.databinding.FragmentMainBinding
 
 class MainFragment : Fragment(),
@@ -26,9 +27,12 @@ class MainFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View {
 
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         setHasOptionsMenu(true)
+
+        requireActivity().title = getString(R.string.app_name)
 
 
         binding = FragmentMainBinding.inflate(inflater)
@@ -45,6 +49,10 @@ class MainFragment : Fragment(),
                 binding.recyclerView.layoutManager = LinearLayoutManager(activity)
             })
             addItemDecoration(divider)
+        }
+
+        binding.addFab.setOnClickListener {
+            onItemClick(NEW_NOTE_ID)
         }
         return binding.root
     }
@@ -96,8 +104,7 @@ class MainFragment : Fragment(),
 
     override fun onItemClick(noteId: Int) {
         findNavController().navigate(
-            MainFragmentDirections.actionEditNote().setNoteId(noteId)
-        )
+            MainFragmentDirections.actionEditNote().setNoteId(noteId))
 
     }
 

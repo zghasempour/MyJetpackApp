@@ -1,11 +1,11 @@
-package com.example.myfirstjetpackapp
+package com.example.plainNote
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.myfirstjetpackapp.data.AppDatabase
-import com.example.myfirstjetpackapp.data.NoteEntity
+import com.example.plainNote.data.AppDatabase
+import com.example.plainNote.data.NoteEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

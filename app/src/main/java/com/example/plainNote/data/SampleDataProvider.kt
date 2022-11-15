@@ -1,4 +1,4 @@
-package com.example.myfirstjetpackapp.data
+package com.example.plainNote.data
 
 import java.util.Date
 
