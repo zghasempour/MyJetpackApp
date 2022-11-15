@@ -2,7 +2,7 @@ package com.example.myfirstjetpackapp.data
 
 import java.util.Date
 
-class SampleDateProvider {
+class SampleDataProvider {
 
     companion object{
         private val sampleText1 = "A simple note"
@@ -13,15 +13,16 @@ class SampleDateProvider {
             In urna justo, bibendum et elementum eget, vestibulum quis lectus. Aliquam aliquet faucibus leo, at laoreet metus facilisis ut. Curabitur blandit cursus justo, vel ornare ipsum aliquet nec. Nam quis enim eu enim porttitor sodales. Vestibulum non odio justo. Morbi ut lectus eget turpis fermentum efficitur ut vel sem. Aliquam consectetur, dolor eu commodo eleifend, dui orci bibendum diam, at mollis nisi est id tortor. Aliquam ut turpis at eros ultrices egestas non ut augue. Duis a faucibus ligula. Pellentesque consectetur enim in ultrices ultricies. Quisque laoreet lobortis sapien, quis pellentesque sapien placerat non. Phasellus feugiat nisl risus, id congue sem pharetra ac. Suspendisse potenti. Aliquam blandit est ipsum, vitae elementum sapien fermentum quis.
 
         """.trimIndent()
-    }
+
 
     private fun getDate(diff : Long): Date {
         return Date( Date().time + diff)
     }
 
     fun getNotes() = arrayListOf(
-        NoteEntity (1,getDate(0), sampleText1),
-        NoteEntity (2,getDate(1), sampleText2),
-        NoteEntity (3,getDate(2), sampleText3)
+        NoteEntity (getDate(0), sampleText1),
+        NoteEntity (getDate(1), sampleText2),
+        NoteEntity (getDate(2), sampleText3)
     )
+    }
 }

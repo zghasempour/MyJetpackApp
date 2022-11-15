@@ -1,16 +1,16 @@
 package com.example.myfirstjetpackapp.data
 
-import androidx.room.TypeConverters
+import androidx.room.TypeConverter
 import java.util.Date
 
 class DateConverter {
 
-    @TypeConverters
+    @TypeConverter
     fun fromTimestamp(value: Long): Date{
         return Date(value)
     }
 
-    @TypeConverters
+    @TypeConverter
     fun dateToTimestamp(date: Date): Long{
         return date.time
     }

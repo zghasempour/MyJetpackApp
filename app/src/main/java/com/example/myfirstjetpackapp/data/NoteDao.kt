@@ -1,5 +1,6 @@
 package com.example.myfirstjetpackapp.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,8 +16,11 @@ interface NoteDao {
     fun insertAll(notes : List<NoteEntity>)
 
     @Query("SELECT * FROM notes ORDER BY date ASC")
-    fun getAll() : List<NoteEntity>
+    fun getAll() : LiveData<List<NoteEntity>>
 
     @Query("SELECT * FROM notes WHERE id = :id")
     fun getNoteById(id: Int) : NoteEntity
+
+    @Query("SELECT COUNT(*) FROM notes")
+    fun getCount(): Int
 }
