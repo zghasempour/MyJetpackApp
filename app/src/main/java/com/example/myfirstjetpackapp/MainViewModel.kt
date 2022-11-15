@@ -24,4 +24,20 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    fun deleteNotes(selectedNotes: List<NoteEntity>) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                database?.noteDao()?.delete(selectedNotes)
+            }
+        }
+    }
+
+    fun deleteAllNotes() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                database?.noteDao()?.deleteAll()
+            }
+        }
+    }
 }

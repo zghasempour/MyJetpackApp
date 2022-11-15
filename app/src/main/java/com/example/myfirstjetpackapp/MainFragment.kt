@@ -2,6 +2,8 @@ package com.example.myfirstjetpackapp
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -61,8 +63,30 @@ class MainFragment : Fragment(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_sample_note -> addSampleNotes()
+            R.id.action_delete -> deleteSelectedNotes()
+            R.id.action_delete_all -> deleteAllNotes()
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun deleteAllNotes(): Boolean {
+        viewModel.deleteAllNotes()
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                noteListAdapter.selectedNotes.clear()
+                requireActivity().invalidateOptionsMenu()
+            },100)
+        return true
+    }
+
+    private fun deleteSelectedNotes(): Boolean {
+        viewModel.deleteNotes(noteListAdapter.selectedNotes)
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                noteListAdapter.selectedNotes.clear()
+                requireActivity().invalidateOptionsMenu()
+            },100)
+        return true
     }
 
     private fun addSampleNotes(): Boolean {
