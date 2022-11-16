@@ -14,14 +14,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.myfirstjetpackapp.R
-import com.example.myfirstjetpackapp.databinding.FragmentEditorBinding
+import com.example.plainNote.databinding.FragmentEditorBinding
 
 class EditorFragment : Fragment() {
 
     private lateinit var viewModel: EditorViewModel
-    private val args : EditorFragmentArgs by navArgs()
-    private lateinit var binding : FragmentEditorBinding
+    private val args: EditorFragmentArgs by navArgs()
+    private lateinit var binding: FragmentEditorBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,13 +38,13 @@ class EditorFragment : Fragment() {
         requireActivity().title =
             if (args.noteId == NEW_NOTE_ID)
                 getString(R.string.new_note)
-        else getString(R.string.edit_note)
+            else getString(R.string.edit_note)
 
         viewModel = ViewModelProvider(this)[EditorViewModel::class.java]
         binding = FragmentEditorBinding.inflate(inflater)
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
-            object : OnBackPressedCallback(true){
+            object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     saveAndReturn()
                 }
@@ -67,7 +66,7 @@ class EditorFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> saveAndReturn()
             else -> super.onOptionsItemSelected(item)
         }
@@ -77,7 +76,7 @@ class EditorFragment : Fragment() {
     private fun saveAndReturn(): Boolean {
         val imm = requireActivity()
             .getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.root.windowToken,0)
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
 
         viewModel.currentNote.value?.text = binding.editor.text.toString()
         viewModel.updateNote()
@@ -93,9 +92,9 @@ class EditorFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        with(binding.editor){
-            outState.putString(NOTE_TEXT_KEY,text.toString())
-            outState.putInt(CURSOR_POSITION_KEY,selectionStart)
+        with(binding.editor) {
+            outState.putString(NOTE_TEXT_KEY, text.toString())
+            outState.putInt(CURSOR_POSITION_KEY, selectionStart)
         }
         super.onSaveInstanceState(outState)
     }

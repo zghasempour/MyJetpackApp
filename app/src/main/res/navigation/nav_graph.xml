@@ -9,7 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="com.example.plainNote.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_edit_note"
             app:destination="@id/editorFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/editorFragment"
         android:name="com.example.plainNote.EditorFragment"
         android:label="fragment_editor"
-        tools:layout="@layout/fragment_editor" >
+        tools:layout="@layout/fragment_editor">
         <argument
             android:name="noteId"
             app:argType="integer"

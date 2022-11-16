@@ -12,8 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myfirstjetpackapp.R
-import com.example.myfirstjetpackapp.databinding.FragmentMainBinding
+import com.example.plainNote.R
+import com.example.plainNote.databinding.FragmentMainBinding
+import com.example.plainNote.data.NoteEntity
 
 class MainFragment : Fragment(),
     NoteListAdapter.IListItemListener {
@@ -27,8 +28,7 @@ class MainFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View {
 
-        (activity as AppCompatActivity).
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         setHasOptionsMenu(true)
 
@@ -47,6 +47,11 @@ class MainFragment : Fragment(),
                 noteListAdapter = NoteListAdapter(it, this@MainFragment)
                 binding.recyclerView.adapter = noteListAdapter
                 binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+
+                val selectedNotes = savedInstanceState?.getParcelableArrayList<NoteEntity>(
+                    SELECTED_NOTES_KEY
+                )
+                noteListAdapter.selectedNotes.addAll(selectedNotes ?: emptyList())
             })
             addItemDecoration(divider)
         }
@@ -61,7 +66,7 @@ class MainFragment : Fragment(),
         val menuId = if (this::noteListAdapter.isInitialized &&
             noteListAdapter.selectedNotes.isNotEmpty()
         )
-             R.menu.main_menu_selected_items
+            R.menu.main_menu_selected_items
         else R.menu.main_menu
 
         inflater.inflate(menuId, menu)
@@ -83,7 +88,8 @@ class MainFragment : Fragment(),
             {
                 noteListAdapter.selectedNotes.clear()
                 requireActivity().invalidateOptionsMenu()
-            },100)
+            }, 100
+        )
         return true
     }
 
@@ -93,7 +99,8 @@ class MainFragment : Fragment(),
             {
                 noteListAdapter.selectedNotes.clear()
                 requireActivity().invalidateOptionsMenu()
-            },100)
+            }, 100
+        )
         return true
     }
 
@@ -104,7 +111,8 @@ class MainFragment : Fragment(),
 
     override fun onItemClick(noteId: Int) {
         findNavController().navigate(
-            MainFragmentDirections.actionEditNote().setNoteId(noteId))
+            MainFragmentDirections.actionEditNote().setNoteId(noteId)
+        )
 
     }
 
@@ -112,4 +120,12 @@ class MainFragment : Fragment(),
         requireActivity().invalidateOptionsMenu()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (this::noteListAdapter.isInitialized)
+            outState.putParcelableArrayList(
+                SELECTED_NOTES_KEY,
+                noteListAdapter.selectedNotes
+            )
+        super.onSaveInstanceState(outState)
+    }
 }

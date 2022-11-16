@@ -14,9 +14,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val database = AppDatabase.getInstance(app)
     val notesList = database?.noteDao()?.getAll()
 
-    fun addSampleNotes(){
+    fun addSampleNotes() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 val sampleNotes = SampleDataProvider.getNotes()
                 database?.noteDao()?.insertAll(sampleNotes)
             }
@@ -25,7 +25,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun deleteNotes(selectedNotes: List<NoteEntity>) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 database?.noteDao()?.delete(selectedNotes)
             }
         }
@@ -33,7 +33,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun deleteAllNotes() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 database?.noteDao()?.deleteAll()
             }
         }

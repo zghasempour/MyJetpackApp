@@ -10,19 +10,20 @@ import androidx.room.TypeConverters
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun noteDao() : NoteDao?
+    abstract fun noteDao(): NoteDao?
 
-    companion object{
+    companion object {
 
-        private var INSTANCE : AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context:Context) : AppDatabase? {
-            if (INSTANCE == null){
-                synchronized(AppDatabase::class){
+        fun getInstance(context: Context): AppDatabase? {
+            if (INSTANCE == null) {
+                synchronized(AppDatabase::class) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,
-                        "plainolnotes.db")
+                        "plainolnotes.db"
+                    )
                         .build()
                 }
             }

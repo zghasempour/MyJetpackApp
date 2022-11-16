@@ -22,9 +22,9 @@ class DatabaseTest {
     private lateinit var database: AppDatabase
 
     @Before
-    fun createDb(){
+    fun createDb() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        database = Room.inMemoryDatabaseBuilder(appContext,AppDatabase::class.java)
+        database = Room.inMemoryDatabaseBuilder(appContext, AppDatabase::class.java)
             .allowMainThreadQueries()
             .build()
 
@@ -35,7 +35,7 @@ class DatabaseTest {
     fun createNotes() {
         dao.insertAll(SampleDataProvider.getNotes())
         val count = dao.getCount()
-        assertEquals(count,SampleDataProvider.getNotes().size)
+        assertEquals(count, SampleDataProvider.getNotes().size)
     }
 
     @Test
@@ -49,7 +49,7 @@ class DatabaseTest {
     }
 
     @After
-    fun closeDb(){
+    fun closeDb() {
         database.close()
     }
 }

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myfirstjetpackapp.R
-import com.example.myfirstjetpackapp.databinding.ListItemBinding
+import com.example.plainNote.R
+import com.example.plainNote.databinding.ListItemBinding
 import com.example.plainNote.data.NoteEntity
 
 class NoteListAdapter(
@@ -44,11 +44,11 @@ class NoteListAdapter(
                 }
                 listener.onItemSelectionChanged()
             }
-                fab.setImageResource(
-                    if (selectedNotes.contains(note))
-                        R.drawable.ic_check
+            fab.setImageResource(
+                if (selectedNotes.contains(note))
+                    R.drawable.ic_check
                 else R.drawable.ic_note
-                )
+            )
 
 
         }
